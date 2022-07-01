@@ -5,9 +5,13 @@ require(readxl)  # reads .xlsx
 #require(BLPestimatoR) # Berry (BLP) contraction mapping package
 
 ## sourcing functions from other scripts ##
+setwd(ProjectDirectory)
 
-source('GaussFunctions.R')
+if(!exists("GAUSSFUNCTIONS_on")){ # Check if script is loaded.
+  source("GaussFunctions.R")
+}
 
+setwd(ProjectDirectory)
 ##### This attempts to emulate dcl.g #####
 
 NIND <- 25230 # zip codes

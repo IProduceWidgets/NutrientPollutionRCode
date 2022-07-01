@@ -1,3 +1,9 @@
+##### Load Packages #####
+
+##### Indicator #####
+
+GAUSSFUNCTIONS_ON <- T
+
 ##### recreating Roger's functions from Gauss in R #####
 
 aggshare <- function(v,asc,gi,n,nl){
