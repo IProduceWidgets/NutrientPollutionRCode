@@ -33,4 +33,3 @@ setwd(ProjectDirectory)
 
 #### Run the first stage discrete choice model ####
 
-test <- T
