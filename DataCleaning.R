@@ -4,29 +4,6 @@
 DATACLEANING_on <- T
 ##### Clean the DCdf data #####
 
-#### what follows is just some df gymnastics to get a list of column names to drop from DCdf ####
-# I guess I could of done this with Dplyr::select(matches(.)) and a regular expression, but...
-
-DropId1 <- FreshIds %>%
-  transmute(
-    ColName = paste('costsd', siteid, sep='')
-  )
-
-DropId2 <- FreshIds %>%
-  transmute(
-    ColName = paste('trips', siteid, sep='')
-  )
-
-DropId <- DropId1 %>%
-  full_join(DropId2, by = 'ColName')
-
-# Create Cleaned Data Frame #
-
-NewDCdf <- DCdf %>%
-  select(
-    -one_of(DropId$ColName)
-  ) #^ haleluja it worked. Now only contains info on non-fresh sites.
-
 ##### Clean Site Characteristic Data #####
 
 FreshIds <- SiteChars %>%
@@ -65,4 +42,28 @@ NewSiteChars <- SiteChars %>%
     #Impervious,      # This may just be error from remote sensing missing data
   ) ### This has kept only variables that have enough data to use.
 
+#### NewDCdf ####
+# what follows is just some df gymnastics to get a list of column names 
+# to drop from DCdf 
+# I guess I could of done this with Dplyr::select(matches(.)) 
+# and a regular expression, but...
 
+DropId1 <- FreshIds %>%
+  transmute(
+    ColName = paste('costsd', siteid, sep='')
+  )
+
+DropId2 <- FreshIds %>%
+  transmute(
+    ColName = paste('trips', siteid, sep='')
+  )
+
+DropId <- DropId1 %>%
+  full_join(DropId2, by = 'ColName')
+
+# Create Cleaned Data Frame #
+
+NewDCdf <- DCdf %>%
+  select(
+    -one_of(DropId$ColName)
+  ) #^ haleluja it worked. Now only contains info on non-fresh sites.

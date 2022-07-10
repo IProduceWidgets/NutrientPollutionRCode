@@ -27,18 +27,23 @@ METHOD <- 2 # some hessian command parameter !!!!! ## CHANGE LATER ##
 
 #### Load Data ####
 
-filepath <- 'C:/Users/Avery/Desktop/Research_Folder/Nutrient_Pollution/GDriveData/'
-
-DCdf <- read_dta(paste(filepath,
-                       'gexport.dta',
-                       sep='')) 
+DCdf <- read_dta(file.path(
+  '..',
+  'GDriveData',
+  'gexport.dta'
+  )
+)
 
 #^ has trip costs and counts from origins to destinations
 #^ also contains 'individual' characteristics (from county census)
 
-FRESH <- read.csv(paste(filepath,
-                        'gexport1.txt',
-                        sep=''), header = F, sep='\t')
+FRESH <- read.csv(file.path(
+                  '..',
+                  'GDriveData',
+                  'gexport1.txt'
+                  ),
+            header = F, sep='\t'
+          )
 
 DEMOS <- DCdf %>%
   transmute(
@@ -88,7 +93,7 @@ CO = CHOI %>%
 #  FINAL PARAMETER SETTINGS
 #########################################################
 
-B_BEGIN <- c(0,0,0,0,0,0,-1,.2, rep.int(-12, NALT-1))
+B_BEGIN <- c(0,0,0,0,0,0,-1,.2, rep.int(-12, NALT-1)) #I dont know if this is supposed to be a list or a vector.
 
 BFIX = 1 # set to 1 if at least 1 parameter is fixed at start.
 

@@ -4,6 +4,7 @@
 # and estimate travel cost ASCs.
 
 # Required packages
+require(tidyr)
 require(haven) # reads .dta
 require(dplyr) # Blessed are the plumbers
 require(readxl)  # reads .xlsx
